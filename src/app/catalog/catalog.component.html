@@ -1,0 +1,42 @@
+
+<p>Catalog component</p>
+<div class="catalog">
+    <ul class="list">
+        <ng-container *ngFor=" let item of saqoneli" >
+            <li *ngIf=" item.category === monishnuli || monishnuli === 'all' "  
+            [ngStyle]="{
+                backgroundColor:item.available ? 'lightgreen' : 'tomato'
+                }"
+            >
+                <div class="imgbox" [ngClass]="{round: item.category === monishnuli}">
+                    <img [src]="imager(item)" [alt]="item.name" [routerLink]="'/item/'+item.id" >
+                </div>
+                <div class="idbox" (click)="test()" >
+                    <div class="id">Products ID:</div>
+                    <div class="idvalue"> {{ item.id }} </div>
+                </div>
+                <div class="namebox" #name>
+                    <div class="name">Products name:</div>
+                    <div class="namevalue"> {{item.name}} </div>
+                </div>
+                <div class="descbox">
+                    <div class="description">About Products:</div>
+                    <div class="descvalue"> {{item.category}} </div>
+                </div>
+                <div class="pricebox">
+                    <div class="price">Price:</div>
+                    <div class="pricevalue"> {{item.price}} </div>
+                </div>
+                <div class="btn" *ngIf="item.available; else request">
+                    Buy
+                </div>
+                <ng-template #request >
+                    <div class="btn"  (click)="loger()" >
+                        Send Request
+                    </div>
+                </ng-template>
+            </li>
+        </ng-container>
+    </ul>
+</div>
+
